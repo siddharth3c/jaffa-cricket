@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jaffa · the daily delivery</title>
+<meta name="description" content="Seven cricket prompts a day, same for everyone. Rare answers carry the ball further down the pitch. Obvious ones barely move it. Bowl a jaffa.">
+<meta name="theme-color" content="#0b1a10">
+<meta property="og:title" content="Jaffa · the daily delivery">
+<meta property="og:description" content="Seven cricket prompts a day. Rare answers carry the ball further down the pitch. Can you bowl a yorker?">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jaffa">
+<meta property="og:url" content="https://siddharth3c.github.io/jaffa-cricket/">
+<meta property="og:image" content="https://siddharth3c.github.io/jaffa-cricket/og.png">
+<meta name="twitter:image" content="https://siddharth3c.github.io/jaffa-cricket/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jaffa · the daily delivery">
+<meta name="twitter:description" content="Seven cricket prompts a day. Rare answers carry the ball further down the pitch.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>try{var s=JSON.parse(localStorage.getItem("jaffa:settings")||"{}");if(s.contrast)document.documentElement.classList.add("contrast");if(s.motion)document.documentElement.classList.add("reduce-motion")}catch(e){}</script>
+</head>
+<body>
+<div id="world" class="world" aria-hidden="true"></div>
+
+<button type="button" class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-haspopup="dialog">
+  <svg class="px" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3h16v3H2zm0 6h16v3H2zm0 6h16v3H2z"/></svg>
+</button>
+<div class="side-btns">
+  <button type="button" class="icon-btn" id="soundBtn" aria-label="Toggle sound"></button>
+  <button type="button" class="icon-btn" id="settingsBtn" aria-label="Settings">
+    <svg class="px" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 4H14V6H16V14H14V16H6V14H4V6H6Z M8 1H12V4H8Z M8 16H12V19H8Z M1 8H4V12H1Z M16 8H19V12H16Z M3 3H6V6H3Z M14 3H17V6H14Z M3 14H6V17H3Z M14 14H17V17H14Z M8 8H12V12H8Z"/></svg>
+  </button>
+  <a class="icon-btn" href="#/me" aria-label="My Jaffa stats">
+    <svg class="px" viewBox="0 0 20 20" fill="currentColor"><path d="M2 16h16v2H2z M3 9h3v6H3z M8.5 4h3v11h-3z M14 7h3v8h-3z"/></svg>
+  </a>
+</div>
+
+<header class="hud" id="hud">
+  <div class="cell"><div class="k">DISTANCE</div><div class="v" id="hudDist">0.00m</div><div class="z" id="hudZone">RELEASE</div></div>
+  <div class="cell"><div class="k">SCORE</div><div class="v" id="hudScore">0</div><div class="z" id="hudBall">&nbsp;</div></div>
+</header>
+
+<main id="dock" class="dock" aria-live="polite"></main>
+<section id="page" class="page" hidden></section>
+
+<dialog id="menu" aria-labelledby="menuTitle">
+  <div class="box menu-panel">
+    <header>
+      <div><div class="eyebrow">JAFFA</div><h2 id="menuTitle">Menu</h2></div>
+      <button class="icon-btn" type="button" data-close aria-label="Close menu">×</button>
+    </header>
+    <div class="rule">Take guard</div>
+    <nav class="menu-nav" aria-label="Main navigation">
+      <a href="#/"><span class="ic">▼</span>Daily delivery</a>
+      <a href="#/unlimited"><span class="ic">∞</span>Unlimited nets</a>
+      <a href="#/party"><span class="ic">●</span>Cherry Bomb party</a>
+      <a href="#/archive"><span class="ic">⟲</span>Archive</a>
+      <a href="#/packs"><span class="ic">▦</span>Themed packs</a>
+      <a href="#/me"><span class="ic">☺</span>My Jaffa</a>
+      <a href="#/friends"><span class="ic">⚑</span>Friends</a>
+      <button type="button" id="menuSettings"><span class="ic">✱</span>Settings</button>
+      <a href="#/faq"><span class="ic">?</span>FAQ</a>
+    </nav>
+    <div class="menu-foot">bowl a jaffa.</div>
+  </div>
+</dialog>
+
+<dialog id="settings" aria-labelledby="settingsTitle">
+  <div class="box menu-panel">
+    <header>
+      <div><div class="eyebrow">JAFFA</div><h2 id="settingsTitle">Settings</h2></div>
+      <button class="icon-btn" type="button" data-close aria-label="Close settings">×</button>
+    </header>
+    <div class="rule">Preferences</div>
+    <label class="toggle"><span>Sound effects</span><input type="checkbox" id="setSound"></label>
+    <label class="toggle"><span>High-contrast tier colours</span><input type="checkbox" id="setContrast"></label>
+    <label class="toggle"><span>Reduce motion</span><input type="checkbox" id="setMotion"></label>
+    <div class="rule">Danger end</div>
+    <button class="btn small" type="button" id="resetData">Erase all my progress</button>
+  </div>
+</dialog>
+
+<div id="toast" role="status"></div>
+
+<script src="data.js"></script>
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js" defer></script>
+<script src="app.js"></script>
+<script src="party.js"></script>
+</body>
+</html>
